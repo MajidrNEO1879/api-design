@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Resources\Api\TicketResource;
 use App\Models\Ticket;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\Api\V1\StoreTicketRequest;
@@ -14,7 +15,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return Ticket::all();
+        //return Ticket::all();
+        return TicketResource::collection(Ticket::paginate());
     }
 
     /**
@@ -38,7 +40,8 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        //to request for spicific tickets like 1 or 2 and etc. in the postman i called it Get ticket
+        return new TicketResource($ticket);
     }
 
     /**
